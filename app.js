@@ -185,7 +185,7 @@ function renderHome() {
   document.getElementById('app').innerHTML = `
     ${navbar()}
     <div class="hero">
-      <div class="hero-tag">Personality Matchup · DBMS Project</div>
+      <div class="hero-tag">Personality Matchup </div>
       <h1>Which historical figure<br/><span>thinks like you?</span></h1>
       <p>Answer 10 questions drawn from 60 scenarios. Your decisions reveal your personality. We match you to one of 14 rulers, philosophers, conquerors, or strategists.</p>
       <button class="btn-start" onclick="startQuiz()">Begin Matchup →</button>
