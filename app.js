@@ -1,16 +1,7 @@
-// ═══════════════════════════════════════
-//  SUPABASE SETUP — paste your keys here
-// ═══════════════════════════════════════
-
 const SUPABASE_URL = 'https://rimwtghdelsbfczylfup.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpbXd0Z2hkZWxzYmZjenlsZnVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NTA1MDYsImV4cCI6MjA4OTQyNjUwNn0.2VcXJlONFKv4aQoizoeOunBHcAxSzoo1f-rp2BfjrDc';
 
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-
-// ═══════════════════════════════════════
-//  APP STATE
-// ═══════════════════════════════════════
 
 const state = {
   currentUser: null,
@@ -20,11 +11,6 @@ const state = {
   selectedOption: null,
 };
 
-
-// ═══════════════════════════════════════
-//  ROUTER
-// ═══════════════════════════════════════
-
 function navigate(page) {
   const app = document.getElementById('app');
   app.innerHTML = '';
@@ -33,11 +19,6 @@ function navigate(page) {
   if (page === 'quiz')   renderQuiz();
   if (page === 'result') renderResult();
 }
-
-
-// ═══════════════════════════════════════
-//  HELPERS
-// ═══════════════════════════════════════
 
 function shuffle(arr) {
   const a = [...arr];
@@ -82,11 +63,6 @@ function logout() {
   state.currentUser = null;
   navigate('login');
 }
-
-
-// ═══════════════════════════════════════
-//  LOGIN PAGE
-// ═══════════════════════════════════════
 
 function renderLogin() {
   document.getElementById('app').innerHTML = `
@@ -167,11 +143,6 @@ function guestLogin() {
   navigate('home');
 }
 
-
-// ═══════════════════════════════════════
-//  HOME PAGE
-// ═══════════════════════════════════════
-
 function renderHome() {
   const cards = LEADERS.map(l => `
     <div class="leader-card">
@@ -185,7 +156,7 @@ function renderHome() {
   document.getElementById('app').innerHTML = `
     ${navbar()}
     <div class="hero">
-      <div class="hero-tag">Personality Matchup </div>
+      <div class="hero-tag">Personality Matchup</div>
       <h1>Which historical figure<br/><span>thinks like you?</span></h1>
       <p>Answer 10 questions drawn from 60 scenarios. Your decisions reveal your personality. We match you to one of 14 rulers, philosophers, conquerors, or strategists.</p>
       <button class="btn-start" onclick="startQuiz()">Begin Matchup →</button>
@@ -218,11 +189,6 @@ function renderHome() {
     </div>
   `;
 }
-
-
-// ═══════════════════════════════════════
-//  QUIZ PAGE
-// ═══════════════════════════════════════
 
 function startQuiz() {
   const byCategory = {};
@@ -308,11 +274,6 @@ function nextQuestion() {
   }
 }
 
-
-// ═══════════════════════════════════════
-//  RESULT PAGE
-// ═══════════════════════════════════════
-
 function renderResult() {
   const scores = LEADERS
     .map(l => ({ leader: l, sim: cosineSim(state.traitScores, l.traits) }))
@@ -391,11 +352,6 @@ function renderResult() {
   saveResult(l.id, state.traitScores, top.pct);
 }
 
-
-// ═══════════════════════════════════════
-//  SUPABASE — SAVE RESULT
-// ═══════════════════════════════════════
-
 async function saveResult(leaderId, traits, matchPct) {
   try {
     const { data, error } = await sb
@@ -427,11 +383,6 @@ async function saveResult(leaderId, traits, matchPct) {
     console.error('Error:', e.message);
   }
 }
-
-
-// ═══════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════
 
 window.onload = () => {
   const saved = getSession();

@@ -1,7 +1,3 @@
-// ═══════════════════════════════════════
-//  LEADERS
-// ═══════════════════════════════════════
-
 const LEADERS = [
   {
     id: 'socrates',
@@ -228,13 +224,6 @@ const LEADERS = [
     ]
   }
 ];
-
-
-// ═══════════════════════════════════════
-//  ALL 60 QUESTIONS — REBALANCED TRAITS
-//  Each answer scores MAX 2 points per trait
-//  Spread evenly so all personalities can win
-// ═══════════════════════════════════════
 
 const ALL_QUESTIONS = [
   {
